@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<script>
+		(function() {
+                const appearance = 'system';
+
+                if (appearance === 'system') {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                    if (prefersDark) {
+                        document.documentElement.classList.add('dark');
+                    }
+                }
+            })();
+	</script>
+
+
+	<style>
+		html {
+			background-color: oklch(1 0 0);
+		}
+
+		html.dark {
+			background-color: oklch(0.145 0 0);
+		}
+	</style>
+
+	<title inertia>Laravel</title>
+
+	<link rel="icon" href="/favicon.ico" sizes="any">
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+	<link rel="preconnect" href="https://fonts.bunny.net">
+	<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+
+	<script type="module">
+		import RefreshRuntime from 'http://[::1]:5173/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+</script>
+	<script type="module" src="http://[::1]:5173/@vite/client"></script>
+	<script type="module" src="http://[::1]:5173/resources/js/app.tsx"></script>
+	<script type="module" src="http://[::1]:5173/resources/js/pages/welcome.tsx"></script>
+</head>
+
+<body class="font-sans antialiased">
+	<div id="app"
+		data-page="{&quot;component&quot;:&quot;welcome&quot;,&quot;props&quot;:{&quot;errors&quot;:{},&quot;name&quot;:&quot;Laravel&quot;,&quot;quote&quot;:{&quot;message&quot;:&quot;No surplus words or unnecessary actions.&quot;,&quot;author&quot;:&quot;Marcus Aurelius&quot;},&quot;auth&quot;:{&quot;user&quot;:null},&quot;sidebarOpen&quot;:true},&quot;url&quot;:&quot;\/&quot;,&quot;version&quot;:&quot;2e0b6af4a91e483a7efa0dda87725a21&quot;,&quot;clearHistory&quot;:false,&quot;encryptHistory&quot;:false}">
+	</div>
+</body>
+
+</html>
