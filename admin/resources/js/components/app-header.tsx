@@ -28,7 +28,7 @@ import {
 } from '@/components/ui/tooltip';
 import { UserMenuContent } from '@/components/user-menu-content';
 import { useInitials } from '@/hooks/use-initials';
-import { cn, isSameUrl, resolveUrl } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
@@ -118,7 +118,12 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                             {rightNavItems.map((item) => (
                                                 <a
                                                     key={item.title}
-                                                    href={resolveUrl(item.href)}
+                                                    href={
+                                                        typeof item.href ===
+                                                        'string'
+                                                            ? item.href
+                                                            : item.href.url
+                                                    }
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="flex items-center space-x-2 font-medium"
@@ -160,10 +165,12 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                             href={item.href}
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
-                                                isSameUrl(
-                                                    page.url,
-                                                    item.href,
-                                                ) && activeItemStyles,
+                                                page.url ===
+                                                    (typeof item.href ===
+                                                    'string'
+                                                        ? item.href
+                                                        : item.href.url) &&
+                                                    activeItemStyles,
                                                 'h-9 cursor-pointer px-3',
                                             )}
                                         >
@@ -175,7 +182,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                             )}
                                             {item.title}
                                         </Link>
-                                        {isSameUrl(page.url, item.href) && (
+                                        {page.url === item.href && (
                                             <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
                                         )}
                                     </NavigationMenuItem>
@@ -202,7 +209,12 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                         <Tooltip>
                                             <TooltipTrigger>
                                                 <a
-                                                    href={resolveUrl(item.href)}
+                                                    href={
+                                                        typeof item.href ===
+                                                        'string'
+                                                            ? item.href
+                                                            : item.href.url
+                                                    }
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="group ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium text-accent-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
@@ -233,12 +245,9 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                     className="size-10 rounded-full p-1"
                                 >
                                     <Avatar className="size-8 overflow-hidden rounded-full">
-                                        <AvatarImage
-                                            src={auth.user.avatar}
-                                            alt={auth.user.name}
-                                        />
+                                        <AvatarImage src={auth.user.avatar} />
                                         <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                            {getInitials(auth.user.name)}
+                                            {getInitials(auth.user.last_name)}
                                         </AvatarFallback>
                                     </Avatar>
                                 </Button>

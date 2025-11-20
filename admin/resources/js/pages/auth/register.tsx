@@ -1,7 +1,6 @@
+import RegisteredUserController from '@/actions/App/Http/Controllers/Auth/RegisteredUserController';
 import { login } from '@/routes';
-import { store } from '@/routes/register';
 import { Form, Head } from '@inertiajs/react';
-
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -18,7 +17,7 @@ export default function Register() {
         >
             <Head title="Register" />
             <Form
-                {...store.form()}
+                {...RegisteredUserController.store.form()}
                 resetOnSuccess={['password', 'password_confirmation']}
                 disableWhileProcessing
                 className="flex flex-col gap-6"
@@ -27,19 +26,37 @@ export default function Register() {
                     <>
                         <div className="grid gap-6">
                             <div className="grid gap-2">
-                                <Label htmlFor="name">Name</Label>
+                                <Label htmlFor="first_name">First Name</Label>
                                 <Input
-                                    id="name"
+                                    id="first_name"
                                     type="text"
                                     required
                                     autoFocus
                                     tabIndex={1}
-                                    autoComplete="name"
-                                    name="name"
-                                    placeholder="Full name"
+                                    autoComplete="first_name"
+                                    name="first_name"
+                                    placeholder="First name"
                                 />
                                 <InputError
-                                    message={errors.name}
+                                    message={errors.first_name}
+                                    className="mt-2"
+                                />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label htmlFor="last_name">Last Name</Label>
+                                <Input
+                                    id="last_name"
+                                    type="text"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="last_name"
+                                    name="last_name"
+                                    placeholder="Last name"
+                                />
+                                <InputError
+                                    message={errors.last_name}
                                     className="mt-2"
                                 />
                             </div>

@@ -36,8 +36,22 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+          
+        $user = $request->user();
+        $request->validate([
+            'profile' => 'nullable|image',
+        ]);
 
-        return to_route('profile.edit');
+        if($request->hasFile('profile')){
+
+            $path = $request->file('profile')->store('profiles', 'public');
+        
+            $user->profile = ''. basename($path);
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('status', 'profile-updated');  
     }
 
     /**
@@ -50,9 +64,6 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
-
-        Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();

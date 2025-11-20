@@ -11,16 +11,17 @@ export default defineConfig({
             ssr: 'resources/js/ssr.tsx',
             refresh: true,
         }),
-        react({
-            babel: {
-                plugins: ['babel-plugin-react-compiler'],
-            },
-        }),
+        react(),
         tailwindcss(),
         wayfinder({
             formVariants: true,
         }),
     ],
+    // server: {
+    //     host: '192.168.1.9',
+    //     port: 5173,
+    //     cors: true,
+    // },
     esbuild: {
         jsx: 'automatic',
     },

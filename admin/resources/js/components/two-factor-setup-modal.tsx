@@ -279,6 +279,7 @@ export default function TwoFactorSetupModal({
     const handleModalNextStep = useCallback(() => {
         if (requiresConfirmation) {
             setShowVerificationStep(true);
+
             return;
         }
 
@@ -288,25 +289,25 @@ export default function TwoFactorSetupModal({
 
     const resetModalState = useCallback(() => {
         setShowVerificationStep(false);
-
         if (twoFactorEnabled) {
             clearSetupData();
         }
     }, [twoFactorEnabled, clearSetupData]);
 
     useEffect(() => {
-        if (isOpen && !qrCodeSvg) {
+        if (!isOpen) {
+            resetModalState();
+
+            return;
+        }
+
+        if (!qrCodeSvg) {
             fetchSetupData();
         }
-    }, [isOpen, qrCodeSvg, fetchSetupData]);
-
-    const handleClose = useCallback(() => {
-        resetModalState();
-        onClose();
-    }, [onClose, resetModalState]);
+    }, [isOpen, qrCodeSvg, fetchSetupData, resetModalState]);
 
     return (
-        <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
+        <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader className="flex items-center justify-center">
                     <GridScanIcon />

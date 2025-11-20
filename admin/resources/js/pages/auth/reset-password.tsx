@@ -1,4 +1,4 @@
-import { update } from '@/routes/password';
+import NewPasswordController from '@/actions/App/Http/Controllers/Auth/NewPasswordController';
 import { Form, Head } from '@inertiajs/react';
 
 import InputError from '@/components/input-error';
@@ -22,7 +22,7 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
             <Head title="Reset password" />
 
             <Form
-                {...update.form()}
+                {...NewPasswordController.store.form()}
                 transform={(data) => ({ ...data, token, email })}
                 resetOnSuccess={['password', 'password_confirmation']}
             >

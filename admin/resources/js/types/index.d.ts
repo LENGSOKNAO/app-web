@@ -23,16 +23,26 @@ export interface NavItem {
 }
 
 export interface SharedData {
-    name: string;
+    first_name: string;
+    last_name: string;
+    profile: string;
+    title: string;
+    subtile: string;
+    is_active: boolean;
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
     [key: string]: unknown;
 }
 
+ 
+
 export interface User {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
+    profile: string;
+    role: string;
     email: string;
     avatar?: string;
     email_verified_at: string | null;
