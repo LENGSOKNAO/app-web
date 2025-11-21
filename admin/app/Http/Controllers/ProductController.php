@@ -18,9 +18,8 @@ class ProductController extends Controller
     public function index()
     {
        
-        $product = Products::with('brand', 'category', 'coupons', 'varants.images', 'tax')->latest()->get();
-
-        return response()->json($product, 200);
+    $product = Products::with('brand', 'category', 'tax', 'varants', 'varants.images', 'coupons', 'varants.images.subImage')->latest()->get();
+    return response()->json($product, 200);
 
     }
 

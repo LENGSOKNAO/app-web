@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests\Settings;
 
 use App\Models\User;
@@ -21,7 +20,6 @@ class ProfileUpdateRequest extends FormRequest
             'last_name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
             'profile' => ['nullable', 'image'],
-
             'email' => [
                 'required',
                 'string',
