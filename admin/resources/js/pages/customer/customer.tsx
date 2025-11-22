@@ -342,6 +342,7 @@ export const columns: ColumnDef<Customer>[] = [
 
             const handleDelete = () => {
                 router.delete(`/customer/${customer.id}`, {
+                    data: { password: password },
                     onSuccess: () => {
                         setOpen(false);
                         setPassword('');

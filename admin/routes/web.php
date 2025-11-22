@@ -44,8 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-    Route::delete('customer/{user}', [UserDeleteController::class, 'destroy']);
-
+ 
 
     // banner
     Route::get('banner', function () {
@@ -136,7 +135,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('customer/customer', ['user' => $user]);
     })->name('customer');
     Route::put('/customer/{customer}', [UserController::class, 'update']);
-
+    Route::delete('customer/{user}', [UserDeleteController::class, 'destroy']);
 
 
 

@@ -13,7 +13,7 @@ class BannerAppController extends Controller
     public function index()
     {
         $banners = BannerApp::with('images')->latest()->get();
-        return Inertia::render('get_banner/index', ['banners' => $banners]);
+        return response()->json($banners);
     }
 
     public function apiIndex()

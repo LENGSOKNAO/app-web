@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           profileRoute: (context) => const ProfileApp(),
         },
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        home: Home(),
       ),
     );
   }

@@ -1,10 +1,12 @@
-import React from "react";
 import Layout from "../layout/Layout";
+import Link from "../components/home/Link";
+import Banner from "../components/home/Banner";
 
 const home = () => {
   return (
     <Layout>
-      <div>home</div>
+      <Link />
+      <Banner />
     </Layout>
   );
 };

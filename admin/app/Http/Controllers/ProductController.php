@@ -141,7 +141,8 @@ class ProductController extends Controller
         $images = [];
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $imageP) {
-                $images[] = $imageP->store('products', 'public');
+                $imageP->store('products', 'public'); 
+                $images[] = $imageP->hashName();
             }
         }
         for ($i = 0; $i < $variantCount; $i++) {
