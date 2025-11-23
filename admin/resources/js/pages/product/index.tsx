@@ -510,7 +510,7 @@ export const columns: ColumnDef<Products>[] = [
                 return (
                     <div className="flex items-center gap-2">
                         <img
-                            src={`/storage/products/${allImages[0]}`} // first image
+                            src={`/storage/${allImages[0]}`} // first image
                             alt="Product"
                             className="h-10 w-10 rounded border object-cover"
                         />

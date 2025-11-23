@@ -1,3 +1,4 @@
+import 'package:app_nike/api/api.dart';
 import 'package:app_nike/data/banner.dart';
 import 'package:app_nike/data/product.dart';
 import 'package:app_nike/model/product.dart';
@@ -8,6 +9,7 @@ import 'package:app_nike/util/common/text/text.dart';
 import 'package:app_nike/util/common/text/text_grey.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:app_nike/model/model_product.dart';
 
 List<ModelProduct> favoriteProducts = [];
 
@@ -222,53 +224,70 @@ class _HomePageState extends State<HomePage>
           SizedBox(height: 20.h),
           SizedBox(
             height: 390.h,
-            child: ListView.separated(
-              itemCount: dataProduct.length,
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (__, _) => SizedBox(width: 5),
-              itemBuilder: (context, index) {
-                final data = dataProduct[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetial(product: data),
+            child: FutureBuilder<List<Product>>(
+              future: ApiService.getProducts(),
+              builder: (context, snapshot) {
+                final listProducts = snapshot.data!;
+
+                return ListView.separated(
+                  itemCount: listProducts.length,
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (__, _) => SizedBox(width: 5),
+                  itemBuilder: (context, index) {
+                    final data = listProducts[index];
+                    final noImage =
+                        data.varants.isNotEmpty &&
+                        data.varants.first.images.isNotEmpty;
+
+                    return GestureDetector(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 314.w,
+                            width: 314.w,
+                            child: noImage
+                                ? Image.network(
+                                    'http://10.0.2.2:8000/api/images/${data.varants.first.images.first.image}',
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    },
+                                  )
+                                : Container(
+                                    color: Colors.grey.shade300,
+                                    child: Icon(
+                                      Icons.image,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                          ),
+                          SizedBox(height: 10.h),
+                          Text(
+                            data.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          SizedBox(height: 10.h),
+                          Text(
+                            data.varants.isEmpty ||
+                                    data.varants.first.price.isEmpty
+                                ? "US00"
+                                : 'US\$${double.parse(data.varants.first.price).toStringAsFixed(0)}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.sp,
+                              color: Colors.grey.shade500,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 314.w,
-                        width: 314.w,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(data.image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10.h),
-                      Text(
-                        data.name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                      SizedBox(height: 10.h),
-                      Text(
-                        'US\$${data.price.toInt()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                          color: Colors.grey.shade500,
-                        ),
-                      ),
-                    ],
-                  ),
                 );
               },
             ),

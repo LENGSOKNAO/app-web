@@ -4,7 +4,7 @@ import Buttom from "../btn/Buttom";
 const Banner = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-5">
+      <div className="flex flex-col items-center justify-center pb-10">
         <img src="/src/assets/banner/banner.png" alt="" className="" />
         <h2 className="text-xl font-medium pt-5">First Look</h2>
         <h2 className="font-medium text-6xl">Nike Air Max Pulse</h2>

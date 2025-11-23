@@ -7,16 +7,19 @@ import { TiSocialInstagram } from "react-icons/ti";
 import { IoLocationSharp } from "react-icons/io5";
 
 const listFooter = [
+  // 0
   {
     name: "FIND A STORE",
     link: "/",
     list: [
+      // map
       { name: "Become A Member", link: "/" },
       { name: "Sign Up for Email", link: "/" },
       { name: "Send Us Feedback", link: "/" },
       { name: "Student Discounts", link: "/" },
     ],
   },
+  // 1
   {
     name: "Get Help",
     link: "/",
@@ -29,6 +32,7 @@ const listFooter = [
       { name: "Contact Us On All Other Inquiries", link: "/" },
     ],
   },
+  // 2
   {
     name: "About Nike",
     link: "/",
@@ -61,6 +65,7 @@ const Footer = () => {
       <div className="bg-[#111111] px-15 py-7">
         <div className="flex justify-between gap-10 ">
           <div className="flex">
+            {/* list Footterx */}
             {listFooter.map((e, i) => (
               <div key={i} className=" text-white">
                 <div className="pr-40">
